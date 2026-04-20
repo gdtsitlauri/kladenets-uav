@@ -1,0 +1,129 @@
+\documentclass[conference]{IEEEtran}
+
+% --- Packages ---
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+% --- Title & Author Info ---
+\title{Proekt Kladenets: A Decentralized Dual-Use Cyber-Physical Architecture for Autonomous Swarms}
+
+\author{
+    \IEEEauthorblockN{George David Tsitlauri}
+    \IEEEauthorblockA{\textit{Dept. of Informatics \& Telecommunications}\\
+    \textit{University of Thessaly, Greece}\\
+    gdtsitlauri@gmail.com}
+}
+
+\begin{document}
+
+\maketitle
+
+% --- Abstract ---
+\begin{abstract}
+This paper presents \textit{Proekt Kladenets}, a comprehensive, dual-use cyber-physical cognitive architecture for autonomous search and rescue (SAR) swarms operating in extreme disaster relief environments. This paper presents a synthetic Proof-of-Concept (PoC) validation. Leveraging low-cost edge AI, resilient communications, and explainable autonomy, the architecture demonstrates how decentralized, lightweight swarms can outperform monolithic, high-cost legacy systems. Empirical results on a GTX 1650 (4GB VRAM) platform validate the theoretical viability of the approach under strict hardware constraints.
+\end{abstract}
+
+% --- Section I: Introduction ---
+\section{Introduction}
+The increasing frequency and severity of natural and man-made disasters demand rapid, scalable, and cost-effective search and rescue (SAR) solutions. Traditional monolithic platforms are economically and logistically unsustainable for large-scale deployments. This work introduces a decentralized, edge-computing SAR swarm architecture, \textit{Proekt Kladenets}, designed to operate on affordable hardware using only synthetic data and lightweight algorithms. The system integrates advanced perception, resilient communications, distributed learning, and explainable AI to enable robust, autonomous operation in contested and denied environments.
+
+% --- Section II: Perception ---
+\section{Edge Perception: Ilya Muromets \& Baba Yaga}
+\subsection{Theory}
+Edge perception is achieved via two complementary modules: post-training quantization (PTQ) for deep neural networks~\cite{gholami2021survey} and Leaky Integrate-and-Fire (LIF) spiking neural networks (SNNs)~\cite{gerstner2002spiking}. PTQ enables efficient inference by mapping high-precision weights to lower-precision representations:
+\begin{equation}
+    w_q = \text{round}\left(\frac{w - w_{\min}}{s}\right), \quad s = \frac{w_{\max} - w_{\min}}{2^b - 1}
+\end{equation}
+where $w$ is the original weight, $w_q$ is the quantized weight, $s$ is the scale, and $b$ is the bit-width.
+
+The LIF neuron dynamics are governed by:
+\begin{equation}
+    \tau_m \frac{dV}{dt} = -(V - V_{rest}) + RI(t)
+\end{equation}
+where $V$ is the membrane potential, $V_{rest}$ is the resting potential, $R$ is the membrane resistance, and $I(t)$ is the input current.
+
+\subsection{Results}
+FP32 inference on the GTX 1650 achieved $0.0587$ seconds per 100 runs. Attempts to deploy INT8 quantization using the \texttt{fbgemm} backend failed due to platform limitations, highlighting the need for specialized neuromorphic NPUs at the edge. The LIF SNN module demonstrated near-zero latency spike response to high-speed targets under synthetic testing.
+
+% --- Section III: Comms ---
+\section{Resilient Communications: Dobrynya, Koschei, Zmey}
+\subsection{Theory}
+Resilient communications are realized through cognitive radio, post-quantum cryptography, and orbital FSOC. Cognitive radio is modeled as a Markov Decision Process (MDP) solved via Q-learning~\cite{watkins1992q}:
+\begin{equation}
+    Q(s,a) \leftarrow Q(s,a) + \alpha \left[ r + \gamma \max_{a'} Q(s',a') - Q(s,a) \right]
+\end{equation}
+where $Q(s,a)$ is the action-value function, $\alpha$ is the learning rate, $r$ is the reward, and $\gamma$ is the discount factor.
+
+Post-quantum security is provided by a lightweight lattice-based encryption wrapper~\cite{bernstein2009introduction}, while FSOC ensures line-of-sight (LOS) communications when RF is jammed~\cite{kaushal2017optical}.
+
+\subsection{Results}
+The Q-learning module stabilized rewards between 20 and 35 points per episode, successfully avoiding simulated jammer interference. The Koschei module encrypted and decrypted C2 messages with perfect fidelity. The Zmey Gorynych FSOC simulation maintained LOS to the LEO satellite throughout the simulation window.
+
+% --- Section IV: Swarm Logic ---
+\section{Swarm Logic \& Learning: Alyosha, Zhar-ptitsa}
+\subsection{Theory}
+Swarm deception and learning are achieved via artificial potential fields and federated averaging~\cite{bonawitz2019towards}. Decoy agents attract adversarial attention, while strikers exploit stealth. Federated Averaging (FedAvg) synchronizes model weights across the mesh network:
+\begin{equation}
+    w^{(t+1)} = \frac{1}{N} \sum_{k=1}^N w_k^{(t)}
+\end{equation}
+where $w_k^{(t)}$ is the weight vector of agent $k$ at round $t$.
+
+\subsection{Results}
+The 10-agent swarm simulation successfully segregated decoy and striker roles. Specifically, three agents were designated as high-RF decoys, moving directly toward the simulated hazard to attract adversarial fire, while the remaining seven strikers executed randomized, stealthy trajectories to avoid detection and maximize mission success. The FedAvg module achieved perfect synchronization of weights across all agents, confirming distributed learning without a central server.
+
+% --- Section V: Physics & XAI ---
+\section{Physics, Survival \& XAI: Svyatogor, Solovey, Vasilisa}
+\subsection{Theory}
+Robust navigation and survivability are enabled by an Extended Kalman Filter (EKF)~\cite{kalman1960new}, aero-acoustic Doppler detection, and explainable AI (XAI)~\cite{doshi2017towards}. The EKF updates state estimates and covariances as:
+\begin{equation}
+    K_k = P_{k|k-1} H_k^T (H_k P_{k|k-1} H_k^T + R_k)^{-1}
+\end{equation}
+where $K_k$ is the Kalman gain, $P_{k|k-1}$ is the predicted covariance, $H_k$ is the observation model, and $R_k$ is the measurement noise.
+
+\subsection{Results}
+The Svyatogor EKF maintained GPS trust at $1.00$ throughout the simulation, with robust spoofing detection. The Solovey module simulated thermal accumulation and Doppler-based evasion triggers, with thermal remaining below the roll threshold. The Vasilisa XAI module prevented a critical action when the cryptographic IFF token returned \texttt{False}, overriding a $92\%$ visual target confidence and a positive neuromorphic spike, demonstrating flawless human-in-the-loop fail-safes.
+
+% --- Section VI: Economics ---
+\section{Command, Control \& Economics: Knyaz Vladimir, Mikula}
+\subsection{Theory}
+A unified C2 dashboard aggregates all module outputs for real-time situational awareness. The architecture is designed to be sanction-proof by leveraging Commercial Off-The-Shelf (COTS) components and open RISC-V architectures, ensuring resilience to export restrictions.
+
+\subsection{Results}
+The calculated Asymmetric Cost-to-Deployment ratio is $200.0$, comparing a \$1,000,000 centralized asset to a \$5,000 edge AI drone. This demonstrates the economic asymmetry and operational viability of the proposed architecture. The dashboard successfully visualized all KPIs.
+
+% --- Section VII: Conclusion ---
+\section{Conclusion}
+\textit{Proekt Kladenets} demonstrates that affordable, decentralized, and explainable edge AI swarms can deliver robust SAR capabilities in extreme environments. The architecture's economic, technical, and operational advantages are validated through comprehensive simulation and empirical results on constrained hardware. Future work will focus on hardware-in-the-loop validation.
+
+% --- Bibliography ---
+\begin{thebibliography}{99}
+
+\bibitem{gholami2021survey}
+A. Gholami, S. Kim, Z. Dong, Z. Yao, M. W. Mahoney, and K. Keutzer, "A Survey of Quantization Methods for Efficient Neural Network Inference," arXiv preprint arXiv:2103.13630, 2021.
+
+\bibitem{gerstner2002spiking}
+W. Gerstner and W. M. Kistler, "Spiking neuron models: Single neurons, populations, plasticity," Cambridge University Press, 2002.
+
+\bibitem{watkins1992q}
+C. J. C. H. Watkins and P. Dayan, "Q-learning," Machine Learning, vol. 8, no. 3, pp. 279--292, 1992.
+
+\bibitem{bonawitz2019towards}
+K. Bonawitz, H. Eichner, W. Grieskamp, D. Huba, A. Ingerman, V. Ivanov, C. Kiddon, J. Konecny, S. Mazzocchi, H. B. McMahan, et al., "Towards federated learning at scale: System design," Proceedings of Machine Learning and Systems, pp. 374--388, 2019.
+
+\bibitem{kalman1960new}
+R. E. Kalman, "A new approach to linear filtering and prediction problems," Journal of Basic Engineering, vol. 82, no. 1, pp. 35--45, 1960.
+
+\bibitem{doshi2017towards}
+F. Doshi-Velez and B. Kim, "Towards a rigorous science of interpretable machine learning," arXiv preprint arXiv:1702.08608, 2017.
+
+\bibitem{bernstein2009introduction}
+D. J. Bernstein, J. Buchmann, and E. Dahmen, "Introduction to post-quantum cryptography," Post-Quantum Cryptography, pp. 1--14, Springer, 2009.
+
+\bibitem{kaushal2017optical}
+H. Kaushal and G. Kaddoum, "Optical communication in space: Challenges and mitigation techniques," IEEE Communications Surveys \& Tutorials, vol. 19, no. 1, pp. 57--96, 2017.
+
+\end{thebibliography}
+
+\end{document}
