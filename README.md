@@ -2,13 +2,18 @@
 
 **A Dual-Use Synthetic Research Platform for Autonomous Swarm Coordination**
 
-**Author:** George David Tsitlauri  
-**Contact:** gdtsitlauri@gmail.com  
-**Website:** gdtsitlauri.dev  
-**GitHub:** github.com/gdtsitlauri  
-**Year:** 2026
 
 Proekt Kladenets is a simulation-heavy cyber-physical research repository that combines swarm coordination, edge AI perception, resilient communications, basic cryptographic messaging, explainability, and command-and-control visualization. The repository is best understood as a synthetic proof-of-concept platform rather than a deployment-validated UAV system.
+
+
+## Project Metadata
+
+| Field | Value |
+| --- | --- |
+| Author | George David Tsitlauri |
+| Affiliation | Dept. of Informatics & Telecommunications, University of Thessaly, Greece |
+| Contact | gdtsitlauri@gmail.com |
+| Year | 2026 |
 
 ## Evidence Status
 
@@ -83,13 +88,16 @@ pdflatex kladenets-uav.tex
 - The repository spans many subsystems, which reduces evidential depth per subsystem.
 - Hardware, radio, and airframe validation remain future work.
 
-## Citation
+## Why Kladenets Can Still Be Strong
 
-```bibtex
-@misc{tsitlauri2026kladenets,
-  author = {George David Tsitlauri},
-  title  = {Proekt Kladenets: A Dual-Use Synthetic Research Platform for Autonomous Swarm Coordination},
-  year   = {2026},
-  url    = {https://github.com/gdtsitlauri}
-}
-```
+Kladenets is strongest when treated as a synthetic swarm-systems platform:
+
+- many modules already produce real artifacts,
+- the repo covers perception, comms, navigation, and explanation together,
+- and its breadth is architectural rather than decorative.
+
+The right upgrade path is to keep that synthetic integration identity and deepen
+selected task slices later, not to pretend it is already a field-tested UAV
+stack.
+
+
